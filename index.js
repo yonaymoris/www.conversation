@@ -60,7 +60,7 @@ async function onPlay(videoEl) {
     const result = await faceapi.detectAllFaces(videoEl, new faceapi.TinyFaceDetectorOptions(forwardParams))
     console.result
 
-    console.log(result)
+    // console.log(result)
 //            const result = await faceapi.tinyYolov2(videoEl, forwardParams)
     if (result.length != 0) {
         const context = canvas.getContext('2d')
@@ -89,11 +89,14 @@ async function onPlay(videoEl) {
             z = EmotionModel.predict(cT)
             let index = z.argMax(1).dataSync()[0]
             let label = emotion_labels[index];
-            ctx.strokeStyle = emotion_colors[index];
-            ctx.rect(s_x, s_y, s_w, s_h);
-            ctx.stroke();
-            ctx.fillStyle = emotion_colors[index];
-            ctx.fillText(label, s_x, s_y);
+
+            document.body.style.background = emotion_colors[index]
+
+            // ctx.strokeStyle = emotion_colors[index];
+            // ctx.rect(s_x, s_y, s_w, s_h);
+            // ctx.stroke();
+            // ctx.fillStyle = emotion_colors[index];
+            // ctx.fillText(label, s_x, s_y);
             ctx.closePath();
         }
 
