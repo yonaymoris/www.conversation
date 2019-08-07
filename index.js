@@ -1,5 +1,8 @@
 let emotion_label;
 var label_value;
+var face;
+var face_neutral;
+var myCanvas;
 
 let scoreThreshold = 0.5
 let sizeType = '160'
@@ -26,10 +29,20 @@ function setup() {
     emotion_label = createDiv('neutral');
     emotion_label.parent('parent');
     emotion_label.addClass('emotion');
+
+    myCanvas = createCanvas(1200, 800);
+    myCanvas.parent('face');
+
+    face = createSprite(340, 434, 200, 200);
+    face_neutral = face.addAnimation('neutral', 'assets/neutral/1.png', 'assets/neutral/6.png', 'assets/neutral/7.png');
+    face_neutral.offX = 600;
+    face_neutral.offY = 400;
+    face_neutral.scale = 0.1;
 }
 
 function draw() {
     emotion_label.html(label_value);
+    drawSprites(face);
 }
 
 

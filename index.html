@@ -31,6 +31,7 @@
             <canvas id="overlay" />
             <canvas id='canvas' />
         </div>
+        <div id="face"></div>
 <!--         <center style="padding:10px">
             <div class="row input-field" style="margin-right: 20px;">
 
@@ -69,6 +70,14 @@
 
         #parent {
             margin-left: 30px;
+            z-index: 999;
+        }
+
+        #face {
+            z-index: 1;
+            position: fixed;
+            top: 30px;
+            left: 30px;
         }
 /*        .margin {
             opacity: 0;
