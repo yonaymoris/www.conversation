@@ -1,3 +1,6 @@
+let emotion_label;
+var label_value;
+
 let scoreThreshold = 0.5
 let sizeType = '160'
 let modelLoaded = false
@@ -5,8 +8,8 @@ var cImg;
 var constraints = {
     audio: false,
     video: {
-        width: 640,
-        height: 480
+        width: 280,
+        height: 180
     }
 };
 var EmotionModel;
@@ -16,6 +19,19 @@ var emotion_labels = ["angry", "disgust", "fear", "happy", "sad", "surprise", "n
 var emotion_colors = ["#ff0000", "#00a800", "#ff4fc1", "#ffe100", "#306eff", "#ff9d00", "#7c7c7c"];
 
 let forwardTimes = []
+
+/* p5.js code */
+
+function setup() {
+    emotion_label = createDiv('neutral');
+    emotion_label.parent('parent');
+    emotion_label.addClass('emotion');
+}
+
+function draw() {
+    emotion_label.html(label_value);
+}
+
 
 function updateTimeStats(timeInMs) {
     forwardTimes = [timeInMs].concat(forwardTimes).slice(0, 30)
@@ -90,6 +106,7 @@ async function onPlay(videoEl) {
             let index = z.argMax(1).dataSync()[0]
             let label = emotion_labels[index];
 
+            label_value = emotion_labels[index];
             document.body.style.background = emotion_colors[index]
 
             // ctx.strokeStyle = emotion_colors[index];
