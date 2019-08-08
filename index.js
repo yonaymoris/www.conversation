@@ -2,6 +2,9 @@ let emotion_label;
 var label_value;
 var face;
 var face_neutral;
+var neutral_happy;
+var face_happy;
+var face_surprise;
 var myCanvas;
 
 let scoreThreshold = 0.5
@@ -37,10 +40,24 @@ function setup() {
     face_neutral = face.addAnimation('neutral', 'assets/neutral/1.png', 'assets/neutral/6.png', 'assets/neutral/7.png');
     face_neutral.offX = 600;
     face_neutral.offY = 400;
-    face_neutral.scale = 0.1;
+
+    neutral_happy = face.addAnimation('neutral_happy', 'assets/neutral-happy/1.png', 'assets/neutral-happy/2.png', 'assets/neutral-happy/3.png', 'assets/neutral-happy/4.png', 'assets/neutral-happy/5.png', 'assets/neutral-happy/6.png', 'assets/neutral-happy/7.png', 'assets/neutral-happy/8.png', 'assets/neutral-happy/9.png', 'assets/neutral-happy/10.png', 'assets/neutral-happy/11.png', 'assets/neutral-happy/12.png', 'assets/neutral-happy/13.png');
+    neutral_happy.offX = 600;
+    neutral_happy.offY = 400;
+
+    face_happy = face.addAnimation('happy', 'assets/happy/1.png', 'assets/happy/2.png', 'assets/happy/3.png', 'assets/happy/4.png', 'assets/happy/5.png', 'assets/happy/6.png', 'assets/happy/7.png', 'assets/happy/8.png', 'assets/happy/9.png', 'assets/happy/10.png', 'assets/happy/11.png');
+    face_happy.offX = 600;
+    face_happy.offY = 400;
+
+    face_surprise = face.addAnimation('surprise', 'assets/surprise/1.png', 'assets/surprise/2.png', 'assets/surprise/3.png', 'assets/surprise/4.png');
+    face_surprise.offX = 600;
+    face_surprise.offY = 400;
 }
 
 function draw() {
+    if(label_value == "neutral" || "happy" || "surprise") {
+        face.changeAnimation(label_value);
+    }
     emotion_label.html(label_value);
     drawSprites(face);
 }
@@ -120,7 +137,7 @@ async function onPlay(videoEl) {
             let label = emotion_labels[index];
 
             label_value = emotion_labels[index];
-            document.body.style.background = emotion_colors[index]
+            // document.body.style.background = emotion_colors[index]
 
             // ctx.strokeStyle = emotion_colors[index];
             // ctx.rect(s_x, s_y, s_w, s_h);
