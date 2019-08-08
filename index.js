@@ -2,9 +2,10 @@ let emotion_label;
 var label_value;
 var face;
 var face_neutral;
-var neutral_happy;
 var face_happy;
 var face_surprise;
+var face_onguard;
+var face_notme;
 var myCanvas;
 
 let scoreThreshold = 0.5
@@ -37,27 +38,32 @@ function setup() {
     myCanvas.parent('face');
 
     face = createSprite(340, 434, 200, 200);
-    face_neutral = face.addAnimation('neutral', 'assets/neutral/1.png', 'assets/neutral/6.png', 'assets/neutral/7.png');
+    face_neutral = face.addAnimation('neutral', 'assets/neutral/1.png', 'assets/neutral/2.png', 'assets/neutral/3.png', 'assets/neutral/4.png', 'assets/neutral/5.png');
     face_neutral.offX = 600;
     face_neutral.offY = 400;
-
-    neutral_happy = face.addAnimation('neutral_happy', 'assets/neutral-happy/1.png', 'assets/neutral-happy/2.png', 'assets/neutral-happy/3.png', 'assets/neutral-happy/4.png', 'assets/neutral-happy/5.png', 'assets/neutral-happy/6.png', 'assets/neutral-happy/7.png', 'assets/neutral-happy/8.png', 'assets/neutral-happy/9.png', 'assets/neutral-happy/10.png', 'assets/neutral-happy/11.png', 'assets/neutral-happy/12.png', 'assets/neutral-happy/13.png');
-    neutral_happy.offX = 600;
-    neutral_happy.offY = 400;
 
     face_happy = face.addAnimation('happy', 'assets/happy/1.png', 'assets/happy/2.png', 'assets/happy/3.png', 'assets/happy/4.png', 'assets/happy/5.png', 'assets/happy/6.png', 'assets/happy/7.png', 'assets/happy/8.png', 'assets/happy/9.png', 'assets/happy/10.png', 'assets/happy/11.png');
     face_happy.offX = 600;
     face_happy.offY = 400;
 
-    face_surprise = face.addAnimation('surprise', 'assets/surprise/1.png', 'assets/surprise/2.png', 'assets/surprise/3.png', 'assets/surprise/4.png');
+    face_surprise = face.addAnimation('surprise', 'assets/surprise/1.png', 'assets/surprise/2.png', 'assets/surprise/3.png', 'assets/surprise/4.png', 'assets/surprise/5.png');
     face_surprise.offX = 600;
     face_surprise.offY = 400;
+
+    face_onguard = face.addAnimation('onguard', 'assets/on-guard/1.png', 'assets/on-guard/2.png', 'assets/on-guard/3.png', 'assets/on-guard/4.png', 'assets/on-guard/5.png', 'assets/on-guard/6.png');
+    face_onguard.offX = 600;
+    face_onguard.offY = 400;
+
+    face_notme = face.addAnimation('notme', 'assets/not-me/1.png', 'assets/not-me/2.png', 'assets/not-me/3.png', 'assets/not-me/4.png');
+    face_notme.offX = 600;
+    face_notme.offY = 400;
 }
 
 function draw() {
-    if(label_value == "neutral" || "happy" || "surprise") {
-        face.changeAnimation(label_value);
-    }
+    if(label_value == "neutral" || label_value == "happy") face.changeAnimation(label_value);
+    else if(label_value == "angry" || label_value == "sad" || label_value == "disgust") face.changeAnimation("surprise");
+    else if (label_value == "fear") face.changeAnimation("onguard");
+    else face.changeAnimation("notme");
     emotion_label.html(label_value);
     drawSprites(face);
 }
@@ -114,8 +120,8 @@ async function onPlay(videoEl) {
 
         let ctx = context;
         ctx.lineWidth = 4;
-        ctx.font = "25px Arial"
-        ctx.fillText('Result', 0, 0);
+        // ctx.font = "25px Arial"
+        // ctx.fillText('Result', 0, 0);
 
         for (var i = 0; i < result.length; i++) {
             ctx.beginPath();
@@ -211,8 +217,9 @@ async function run() {
     await faceapi.loadTinyFaceDetectorModel(Model_url)
     modelLoaded = true
 
-    var status = document.getElementById('status');
-    status.innerHTML = "Initializing the camera ... ";
+    console.log("Initializing the camera...")
+    // var status = document.getElementById('status');
+    // status.innerHTML = "Initializing...";
 
     navigator.mediaDevices.getUserMedia(constraints)
         .then(successCallback)
