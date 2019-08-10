@@ -2,10 +2,6 @@ let emotion_label;
 var label_value;
 var face;
 var face_neutral;
-var face_happy;
-var face_surprise;
-var face_onguard;
-var face_notme;
 var myCanvas;
 
 let scoreThreshold = 0.5
@@ -23,7 +19,7 @@ var EmotionModel;
 var offset_x = 27;
 var offset_y = 20;
 var emotion_labels = ["angry", "disgust", "fear", "happy", "sad", "surprise", "neutral"];
-var emotion_colors = ["#ff0000", "#00a800", "#ff4fc1", "#ffe100", "#306eff", "#ff9d00", "#7c7c7c"];
+var emotion_colors = ["#ff0000", "#ff0000", "#ff4fc1", "#ffe100", "#ff9d00", "#ff9d00", "#7c7c7c"];
 
 let forwardTimes = []
 
@@ -37,35 +33,34 @@ function setup() {
     myCanvas = createCanvas(1200, 800);
     myCanvas.parent('face');
 
-    face = createSprite(340, 434, 200, 200);
-    face_neutral = face.addAnimation('neutral', 'assets/neutral/1.png', 'assets/neutral/2.png', 'assets/neutral/3.png', 'assets/neutral/4.png', 'assets/neutral/5.png');
-    face_neutral.offX = 600;
-    face_neutral.offY = 400;
-
-    face_happy = face.addAnimation('happy', 'assets/happy/1.png', 'assets/happy/2.png', 'assets/happy/3.png', 'assets/happy/4.png', 'assets/happy/5.png', 'assets/happy/6.png', 'assets/happy/7.png', 'assets/happy/8.png', 'assets/happy/9.png', 'assets/happy/10.png', 'assets/happy/11.png');
-    face_happy.offX = 600;
-    face_happy.offY = 400;
-
-    face_surprise = face.addAnimation('surprise', 'assets/surprise/1.png', 'assets/surprise/2.png', 'assets/surprise/3.png', 'assets/surprise/4.png', 'assets/surprise/5.png');
-    face_surprise.offX = 600;
-    face_surprise.offY = 400;
-
-    face_onguard = face.addAnimation('onguard', 'assets/on-guard/1.png', 'assets/on-guard/2.png', 'assets/on-guard/3.png', 'assets/on-guard/4.png', 'assets/on-guard/5.png', 'assets/on-guard/6.png');
-    face_onguard.offX = 600;
-    face_onguard.offY = 400;
-
-    face_notme = face.addAnimation('notme', 'assets/not-me/1.png', 'assets/not-me/2.png', 'assets/not-me/3.png', 'assets/not-me/4.png');
-    face_notme.offX = 600;
-    face_notme.offY = 400;
+    face = createSprite(680, 400, 512, 512);
+    face.addAnimation('neutral', 'assets/neutral/1.png', 'assets/neutral/2.png', 'assets/neutral/3.png', 'assets/neutral/4.png');
+    face.addAnimation('happy', 'assets/happy/1.png', 'assets/happy/2.png', 'assets/happy/3.png', 'assets/happy/4.png');
+    face.addAnimation('surprise', 'assets/surprise/1.png', 'assets/surprise/2.png', 'assets/surprise/3.png', 'assets/surprise/4.png');
+    face.addAnimation('angry', 'assets/angry/1.png', 'assets/angry/2.png', 'assets/angry/3.png', 'assets/angry/4.png');
+    face.addAnimation('fear', 'assets/fear/1.png', 'assets/fear/2.png', 'assets/fear/3.png');
 }
 
 function draw() {
-    if(label_value == "neutral" || label_value == "happy") face.changeAnimation(label_value);
-    else if(label_value == "angry" || label_value == "sad" || label_value == "disgust") face.changeAnimation("surprise");
-    else if (label_value == "fear") face.changeAnimation("onguard");
-    else face.changeAnimation("notme");
+    if(label_value == "neutral" || label_value == "happy" || label_value == "fear") {
+        face.changeAnimation(label_value); 
+        console.log(`Reply: ${label_value}`);
+    }
+    else if(label_value == "angry" || label_value == "disgust") {
+        face.changeAnimation("angry");
+        console.log("Reply: angry");
+    }
+    else if (label_value == "sad" || label_value == "surprise") {
+        face.changeAnimation("surprise");
+        console.log("Reply: surprise");
+    }
+    else {
+        face.changeAnimation("neutral");
+        console.log("Reply: neutral");
+    }
+
     emotion_label.html(label_value);
-    drawSprites(face);
+    drawSprites();
 }
 
 
@@ -143,13 +138,8 @@ async function onPlay(videoEl) {
             let label = emotion_labels[index];
 
             label_value = emotion_labels[index];
-            // document.body.style.background = emotion_colors[index]
+            document.body.style.background = emotion_colors[index]
 
-            // ctx.strokeStyle = emotion_colors[index];
-            // ctx.rect(s_x, s_y, s_w, s_h);
-            // ctx.stroke();
-            // ctx.fillStyle = emotion_colors[index];
-            // ctx.fillText(label, s_x, s_y);
             ctx.closePath();
         }
 
