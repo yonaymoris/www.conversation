@@ -14,10 +14,7 @@ P.S. Works for Google Chrome.
 
 `www.conversation` uses a pretrained model by @kevinisbest to detect certain emotions: neutral, happy, angry, sad, disgust, fear and surprise. If emotion is detected, a background-color and animation change accordingly.
 
-![face](https://www.yonaymoris.me/img/www/1.png)
-![face](https://www.yonaymoris.me/img/www/2.png)
-![face](https://www.yonaymoris.me/img/www/3.png)
-![face](https://www.yonaymoris.me/img/www/4.png)
+![face](screenshot.png)
 
 # Visuals
 
