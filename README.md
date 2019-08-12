@@ -1,6 +1,6 @@
 # Description
 
-www.conversation shows a different way of communication between human and technology. 
+`www.conversation` shows a different way of communication between human and technology. 
 
 Can machines love? What if we could talk to computers with our emotions? Would it look like a more human-like conversation? 
 
@@ -12,7 +12,7 @@ P.S. Works for Google Chrome.
 
 # How It Works
 
-www.conversation uses a pretrained model by [Kevin Hsiao](https://github.com/kevinisbest/FrontEnd-EmotionDetection) to detect certain emotions: neutral, happy, angry, sad, disgust, fear and surprise. If emotion is detected, a background-color and animation change accordingly.
+`www.conversation` uses a pretrained model by [Kevin Hsiao](https://github.com/kevinisbest/FrontEnd-EmotionDetection) to detect certain emotions: neutral, happy, angry, sad, disgust, fear and surprise. If emotion is detected, a background-color and animation change accordingly.
 
 # Visuals
 
