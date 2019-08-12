@@ -12,7 +12,7 @@ P.S. Works for Google Chrome.
 
 # How It Works
 
-`www.conversation` uses a pretrained model by @kevinisbest to detect certain emotions: neutral, happy, angry, sad, disgust, fear and surprise. If emotion is detected, a background-color and animation change accordingly.
+`www.conversation` uses a pretrained model by [@kevinisbest](https://github.com/kevinisbest/FrontEnd-EmotionDetection) to detect certain emotions: neutral, happy, angry, sad, disgust, fear and surprise. If emotion is detected, a background-color and animation change accordingly.
 
 ![face](screenshot.png)
 
